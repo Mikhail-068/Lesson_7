@@ -11,7 +11,7 @@ text = '''
   0. Выход.
 --------------------------
 '''
-file_name = 'balance2.data'
+file_name = 'balance.txt'
 
 
 # Если нет файла balance.txt, мы его создаем и записыаем туда баланс = 0
@@ -42,27 +42,28 @@ def write_(new_balance):
         f.write(new_balance)
 
 
-# def bank():
-#     while True:
-#         print(text)
-#         user = input('Введите номер: ')
-#         if user == '1':
-#             bal = read_()
-#             print(f'Ваш баланс: {bal} руб.')
-#         elif user == '2':
-#              check = int(input('На сколько вы хотите пополнить счёт: '))
-#              bal = read_()
-#              bal += check
-#              write_(bal)
-#         elif user == '3':
-#             check2 = int(input('Сколько вы хотите снять со счёта?: '))
-#             bal = read_()
-#             if check2 > bal:
-#                 print('На вашем счёте не достаточно средств...')
-#             else:
-#                 bal -=  check2
-#                 write_(bal)
-#         elif user == '0':
-#             break
-#         else:
-#             continue
+def bank():
+    while True:
+        print(text)
+        user = input('Введите номер: ')
+        if user == '1':
+            bal = read_()
+            print(f'Ваш баланс: {bal} руб.')
+        elif user == '2':
+             check = int(input('На сколько вы хотите пополнить счёт: '))
+             bal = read_()
+             bal += check
+             write_(bal)
+        elif user == '3':
+            check2 = int(input('Сколько вы хотите снять со счёта?: '))
+            bal = read_()
+            if check2 > bal:
+                print('На вашем счёте не достаточно средств...')
+            else:
+                bal -=  check2
+                write_(bal)
+        elif user == '0':
+            break
+        else:
+            continue
+
