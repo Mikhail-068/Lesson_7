@@ -7,7 +7,7 @@ FILE_NAME = 'orders.txt'
 
 orders = []
 if os.path.exists(FILE_NAME):
-    with open(FILE_NAME, 'r') as f:
+    with open(FILE_NAME, 'a') as f:
         for order in f:
             orders.append(order.replace('\n', ''))
 
