@@ -27,50 +27,43 @@ def read_():
     '''
     with open(file_name, 'r') as f:
         balance = f.read()
-    print(f'Ваш баланс: {balance}')
 
     return int(balance)
 
 
-
-
-def write(new_balance):
+def write_(new_balance):
     '''
     Записываем обязательно строковые данные!!!
     :param new_balance: str()
     :return:  None
     '''
+    new_balance = str(new_balance)
     with open(file_name, 'w') as f:
         f.write(new_balance)
 
 
+def bank():
+    while True:
+        print(text)
+        user = input('Введите номер: ')
+        if user == '1':
+            bal = read_()
+            print(f'Ваш баланс: {bal} руб.')
+        elif user == '2':
+             check = int(input('На сколько вы хотите пополнить счёт: '))
+             bal = read_()
+             bal += check
+             write_(bal)
+        elif user == '3':
+            check2 = int(input('Сколько вы хотите снять со счёта?: '))
+            bal = read_()
+            if check2 > bal:
+                print('На вашем счёте не достаточно средств...')
+            else:
+                bal -=  check2
+                write_(bal)
+        elif user == '0':
+            break
+        else:
+            continue
 
-
-
-
-
-
-
-
-
-
-while True:
-    print('1. Пополнить счёт')
-    print('2. История покупок')
-    print('2. История покупок')
-    print('2. История покупок')
-    print('3. Выход')
-    choise = input('Введите номер: ')
-    if choise == '1':
-        name = input('Введите название: ')
-        orders.append(name)
-    elif choise == '2':
-        for order in orders:
-            print(order)
-    elif choise == '3':
-        with open(FILE_NAME, 'w') as f:
-            for order in orders:
-                f.write(f'{order}\n')
-        break
-    else:
-        print('Неправильно введены даные')
