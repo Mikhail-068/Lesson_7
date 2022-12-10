@@ -110,6 +110,10 @@ def write_json(buy, selector):
     with open(file_buy, selector, encoding='utf-8') as f:
         json.dump(buy, f, ensure_ascii=False)
 
+# def write_json(buy, selector):
+#     with open(file_buy2, selector, encoding='utf-8') as f:
+#         yaml.dump(buy, f, allow_unicode=True)
+
 
 buy = {'Покупки': ['батон', 'колбаса', 'майонез']}
 # Проверяем, пустой список или нет.
