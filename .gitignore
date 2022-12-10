@@ -2,3 +2,5 @@
 /.gitignore
 /balance.txt
 /balance.data
+/buy.json
+/buy.yaml

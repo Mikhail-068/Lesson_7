@@ -1,24 +1,39 @@
 """
 Программа Мой банковский счет
 """
-import os, pickle
+import os, pickle, json
 
 text = '''
 ======== V I S A =========
   1. Посмотреть баланс.
   2. Пополнить счёт.
   3. Снять со счёта.
+  4. Добавить покупку.
+  5. История покупок.
   0. Выход.
 --------------------------
 '''
-file_name = 'balance.data'
 
+text_json = '''
+------ И С Т О Р И Я   П О К У П О К -------
+--------------------------------------------
+|       У вас пока что нет покупок         |   
+--------------------------------------------
+'''.strip()
+
+
+
+file_name = 'balance.data'
+file_buy = 'buy.json'
 
 # Если нет файла balance.txt, мы его создаем и записыаем туда баланс = 0
 if not os.path.exists(file_name):
     balance = {'balance': 0}
     with open(file_name, 'wb') as f:
         pickle.dump(balance, f)
+if not os.path.exists(file_buy):
+    with open(file_buy, 'w') as f:
+        json.dump(text_json, f)
 
 
 def read_():
@@ -41,14 +56,6 @@ def write_(balance):
 
     with open(file_name, 'wb') as f:
         pickle.dump(balance, f)
-
-# new_val = 15
-#
-# balance = read_()
-# balance['balance'] += new_val
-#
-# write_(balance)
-# print(read_())
 
 
 def bank():
@@ -74,9 +81,23 @@ def bank():
                 bal['balance'] -= check2
                 write_(bal)
 
+        elif user == '4':
+            bue = input('Добавить покупку: ')
+
+
+
+
+
         elif user == '0':
             break
         else:
             continue
 
-bank()
+
+def read_json():
+    with open(file_buy, 'r') as f:
+        buy = json.load(f)
+    print(buy)
+
+
+read_json()

@@ -1,7 +1,8 @@
-import pickle
+import yaml
 
 
-balance = {'balance': 0}
-balance['balance']
+text = {'Mondey': ['Молоко', "Батон"],
+    "Tuesday": ["Кефир", "шоколад"]}
 
-print(balance['balance'] < 90)
+with open('buy.yaml', 'w') as f:
+    yaml.dump(text, f)
