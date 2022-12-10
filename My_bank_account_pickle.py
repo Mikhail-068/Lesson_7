@@ -1,7 +1,7 @@
 """
 Программа Мой банковский счет
 """
-import os
+import os, pickle
 
 text = '''
 ======== V I S A =========
@@ -11,35 +11,44 @@ text = '''
   0. Выход.
 --------------------------
 '''
-file_name = 'balance.txt'
+file_name = 'balance.data'
 
 
 # Если нет файла balance.txt, мы его создаем и записыаем туда баланс = 0
 if not os.path.exists(file_name):
-    with open(file_name, 'w') as f:
-        f.write('0')
+    balance = {'balance': 0}
+    with open(file_name, 'wb') as f:
+        pickle.dump(balance, f)
 
 
 def read_():
     '''
     Функция для чтения баланса из нашего файла
-    :return: число!!!
+    :return: словарь!
     '''
-    with open(file_name, 'r') as f:
-        balance = f.read()
+    with open(file_name, 'rb') as f:
+        balance = pickle.load(f)
 
-    return int(balance)
+    return balance
 
 
-def write_(new_balance):
+def write_(balance):
     '''
-    Записываем обязательно строковые данные!!!
-    :param new_balance: str()
-    :return:  None
+    Записываем значение словаря!
+    :param balance: словарь
+    :return:
     '''
-    new_balance = str(new_balance)
-    with open(file_name, 'w') as f:
-        f.write(new_balance)
+
+    with open(file_name, 'wb') as f:
+        pickle.dump(balance, f)
+
+# new_val = 15
+#
+# balance = read_()
+# balance['balance'] += new_val
+#
+# write_(balance)
+# print(read_())
 
 
 def bank():
@@ -48,22 +57,26 @@ def bank():
         user = input('Введите номер: ')
         if user == '1':
             bal = read_()
-            print(f'Ваш баланс: {bal} руб.')
+            print(bal)
+
         elif user == '2':
-             check = int(input('На сколько вы хотите пополнить счёт: '))
-             bal = read_()
-             bal += check
-             write_(bal)
+            check = int(input('На сколько вы хотите пополнить счёт: '))
+            bal = read_()
+            bal['balance'] += check
+            write_(bal)
+
         elif user == '3':
             check2 = int(input('Сколько вы хотите снять со счёта?: '))
             bal = read_()
-            if check2 > bal:
+            if check2 > bal['balance']:
                 print('На вашем счёте не достаточно средств...')
             else:
-                bal -=  check2
+                bal['balance'] -= check2
                 write_(bal)
+
         elif user == '0':
             break
         else:
             continue
 
+bank()

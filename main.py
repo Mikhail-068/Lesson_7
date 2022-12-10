@@ -1,3 +1,7 @@
-from My_bank_account_txt import bank
+import pickle
 
-bank()
+
+balance = {'balance': 0}
+balance['balance']
+
+print(balance['balance'] < 90)
