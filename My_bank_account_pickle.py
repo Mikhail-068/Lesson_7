@@ -24,10 +24,29 @@ text_json = '''
 --------------------------------------------
 '''.strip()
 
+text_add = '''
+    У вас пока что нет покупок, не желаете добавить покупку?
+----------------------------------------------------------------
+1. Добавить покупку.
+2. Отказаться.
+
+'''.strip()
+
+text_add2 = '''
+        Добавим покупку?
+----------------------------------
+1. Добавить покупку.
+2. Отказаться.
+
+'''.strip()
+
+
 example_test = 'У вас пока что нет покупок'
 
 file_name = 'balance.data'
-file_buy = 'buy.json'
+file_buy = 'buy.yaml'
+text_yaml = {'Покупки': []}
+
 
 # Если нет файла "balance.txt", мы его создаем.
 if not os.path.exists(file_name):
@@ -35,10 +54,11 @@ if not os.path.exists(file_name):
     with open(file_name, 'wb') as f:
         pickle.dump(balance, f)
 
-# Если нет "buy.json", мы его создаем.
+
+# Если нет "buy.yaml", мы его создаем.
 if not os.path.exists(file_buy):
-    with open(file_buy, 'w') as f:
-        json.dump(text_json, f)
+    with open(file_buy, 'w', encoding='utf-8') as f:
+        yaml.dump(text_yaml, f, allow_unicode=True)
 
 
 def read_():
@@ -105,21 +125,37 @@ def read_yaml():
 
     return buy
 
-buy = read_yaml()
-print(buy)
-#
-#
-# history = read_json()
-# print(history)
-#
-# file_buy2 = '1.yaml'
-#
-#
-#
-#
-# buy = {'Покупки': ['батон', 'колбаса', 'майонез']}
+
+def write_yaml(buy):
+    with open(file_buy, 'w', encoding='utf-8') as f:
+        yaml.dump(buy, f, allow_unicode=True)
+
+
+
+
+
+def add_buy():
+    '''
+    Читаем файл с историей покупок и добавляем туда новые покупки. Записываем файл.
+    :return: None
+    '''
+    user = input('Введите покупки:\n')
+
+    history = read_yaml()
+    print(history)
+    temp = history['Покупки']
+    # print(temp)
+    temp.append(user)
+    history['Покупки'] = temp
+    # print(history)
+    write_yaml(history)
+
+# with open(file_buy, 'r', encoding='utf-8') as f:
+#     buy = yaml.load(f, Loader=yaml.loader.FullLoader)
+
+# print(file_buy)
+# add_buy()
+
 # Проверяем, пустой список или нет.
 # if example_test in history:
-#     write_json(buy, 'w', encoding='utg-8')
-
-# write_json(buy, 'w')
+#     write_yaml()

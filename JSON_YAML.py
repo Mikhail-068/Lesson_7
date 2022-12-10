@@ -52,7 +52,7 @@ from yaml.loader import  SafeLoader, BaseLoader, FullLoader, UnsafeLoader
 '''
 # YAML
 with open('person.yaml', 'w') as f:
-    yaml.dump(person, f)
+    yaml.dump(person, f, allow_unicode=True)
 
 with open('buy.yaml', 'r', encoding='utf-8') as f:
     result = yaml.load(f, Loader=FullLoader)
