@@ -29,11 +29,13 @@ example_test = 'У вас пока что нет покупок'
 file_name = 'balance.data'
 file_buy = 'buy.json'
 
-# Если нет файла balance.txt, мы его создаем и записыаем туда баланс = 0
+# Если нет файла "balance.txt", мы его создаем.
 if not os.path.exists(file_name):
     balance = {'balance': 0}
     with open(file_name, 'wb') as f:
         pickle.dump(balance, f)
+
+# Если нет "buy.json", мы его создаем.
 if not os.path.exists(file_buy):
     with open(file_buy, 'w') as f:
         json.dump(text_json, f)
@@ -97,27 +99,27 @@ def bank():
             continue
 
 
-def read_json():
-    with open(file_buy, 'r') as f:
-        buy = json.load(f)
+def read_yaml():
+    with open(file_buy, 'r', encoding='utf-8') as f:
+        buy = yaml.load(f, Loader=yaml.loader.FullLoader)
+
     return buy
 
-
+buy = read_yaml()
+print(buy)
+#
+#
 # history = read_json()
-
-file_buy2 = '1.yaml'
-def write_json(buy, selector):
-    with open(file_buy, selector, encoding='utf-8') as f:
-        json.dump(buy, f, ensure_ascii=False)
-
-# def write_json(buy, selector):
-#     with open(file_buy2, selector, encoding='utf-8') as f:
-#         yaml.dump(buy, f, allow_unicode=True)
-
-
-buy = {'Покупки': ['батон', 'колбаса', 'майонез']}
+# print(history)
+#
+# file_buy2 = '1.yaml'
+#
+#
+#
+#
+# buy = {'Покупки': ['батон', 'колбаса', 'майонез']}
 # Проверяем, пустой список или нет.
 # if example_test in history:
 #     write_json(buy, 'w', encoding='utg-8')
 
-write_json(buy, 'w')
+# write_json(buy, 'w')
