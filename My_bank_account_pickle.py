@@ -1,7 +1,10 @@
 """
 Программа Мой банковский счет
 """
-import os, pickle, json
+import json
+import os
+import pickle
+import yaml
 
 text = '''
 ======== V I S A =========
@@ -21,7 +24,7 @@ text_json = '''
 --------------------------------------------
 '''.strip()
 
-
+example_test = 'У вас пока что нет покупок'
 
 file_name = 'balance.data'
 file_buy = 'buy.json'
@@ -97,7 +100,20 @@ def bank():
 def read_json():
     with open(file_buy, 'r') as f:
         buy = json.load(f)
-    print(buy)
+    return buy
 
 
-read_json()
+# history = read_json()
+
+file_buy2 = '1.yaml'
+def write_json(buy, selector):
+    with open(file_buy, selector, encoding='utf-8') as f:
+        json.dump(buy, f, ensure_ascii=False)
+
+
+buy = {'Покупки': ['батон', 'колбаса', 'майонез']}
+# Проверяем, пустой список или нет.
+# if example_test in history:
+#     write_json(buy, 'w', encoding='utg-8')
+
+write_json(buy, 'w')
