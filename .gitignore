@@ -1,3 +1,4 @@
 /.idea/
-.gitignore
-balance.txt
+/.gitignore
+/balance.txt
+/balance.data
