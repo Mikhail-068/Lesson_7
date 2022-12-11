@@ -83,10 +83,31 @@ def write_(balance):
         pickle.dump(balance, f)
 
 
+def add_buy():
+    history = read_yaml()
+
+    if text_yaml['Покупки'] == history['Покупки']:
+        user_select = input(f'{text_add}\n')
+        if user_select == '1':
+            user = input('Введите покупку: ').split(', ')
+            history['Покупки'] = user
+            write_yaml(history)
+    else:
+        user_select = input(f'{text_add2}\n')
+        if user_select == '1':
+            user = input('Введите покупку: ').split(', ')
+            temp = history['Покупки']
+            for i in user:
+                temp.append(i)
+            history['Покупки'] = temp
+            write_yaml(history)
+
+
 def bank():
     while True:
         print(text)
         user = input('Введите номер: ')
+
         if user == '1':
             bal = read_()
             print(bal)
@@ -107,11 +128,11 @@ def bank():
                 write_(bal)
 
         elif user == '4':
-            bue = input('Добавить покупку: ')
+            add_buy()
 
-
-
-
+        elif user == '5':
+            history = read_yaml()
+            print(history)
 
         elif user == '0':
             break
@@ -134,28 +155,4 @@ def write_yaml(buy):
 
 
 
-def add_buy():
-    '''
-    Читаем файл с историей покупок и добавляем туда новые покупки. Записываем файл.
-    :return: None
-    '''
-    user = input('Введите покупки:\n')
 
-    history = read_yaml()
-    print(history)
-    temp = history['Покупки']
-    # print(temp)
-    temp.append(user)
-    history['Покупки'] = temp
-    # print(history)
-    write_yaml(history)
-
-# with open(file_buy, 'r', encoding='utf-8') as f:
-#     buy = yaml.load(f, Loader=yaml.loader.FullLoader)
-
-# print(file_buy)
-# add_buy()
-
-# Проверяем, пустой список или нет.
-# if example_test in history:
-#     write_yaml()
